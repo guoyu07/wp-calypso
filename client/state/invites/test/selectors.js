@@ -187,6 +187,7 @@ describe( 'selectors', () => {
 					items: {},
 				},
 			};
+
 			expect( getSelectedInvite( state, 12345, '123456asdf789' ) ).to.equal( undefined );
 		} );
 	} );
