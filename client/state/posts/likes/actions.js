@@ -10,6 +10,8 @@ import {
 	POST_LIKES_REQUEST,
 	POST_LIKES_REQUEST_SUCCESS,
 	POST_LIKES_REQUEST_FAILURE,
+	POST_LIKE,
+	POST_UNLIKE,
 } from 'state/action-types';
 
 /**
@@ -58,3 +60,29 @@ export function requestPostLikes( siteId, postId ) {
 			} );
 	};
 }
+
+/**
+ * Create a like action for a given site and post
+ *
+ * @param {Number} siteId Site ID
+ * @param {Number} postId Post ID
+ * @returns {Object} The like action
+ */
+export const like = ( siteId, postId ) => ( {
+	type: POST_LIKE,
+	siteId,
+	postId,
+} );
+
+/**
+ * Create an unlike action for a given site and post
+ *
+ * @param {Number} siteId Site ID
+ * @param {Number} postId Post ID
+ * @returns {Object} The unlike action
+ */
+export const unlike = ( siteId, postId ) => ( {
+	type: POST_UNLIKE,
+	siteId,
+	postId,
+} );
