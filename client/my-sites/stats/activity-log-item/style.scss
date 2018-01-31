@@ -247,3 +247,14 @@
 		min-width: 128px;
 	}
 }
+
+.activity-log-item__help-action {
+	color: $gray;
+	width: 110px;
+	font-weight: normal;
+	font-size: 1.3rem;
+}
+
+.activity-log-item__help-action .gridicon {
+	margin-right: 5px;
+}
