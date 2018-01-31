@@ -14,5 +14,5 @@ import { POST_LIKES_REQUEST } from 'state/action-types';
 import { dispatchRequestEx } from 'state/data-layer/wpcom-http/utils';
 
 export default mergeHandlers( newLike, mine, {
-	[ POST_LIKES_REQUEST ]: [ dispatchRequestEx() ],
+	[ POST_LIKES_REQUEST ]: [ dispatchRequestEx( {} ) ],
 } );
