@@ -176,11 +176,7 @@ class CancelPurchaseForm extends React.Component {
 			translate( 'I’m going to use my domain with WordPress.com without transferring it.' )
 		);
 
-		appendRadioOption(
-			'anotherReasonOne',
-			translate( 'Another reason…' ),
-			translate( 'How can we improve?' )
-		);
+		appendRadioOption( 'anotherReasonOne', translate( 'Another reason…' ), ' ' );
 
 		return (
 			<div>
@@ -242,11 +238,7 @@ class CancelPurchaseForm extends React.Component {
 			translate( 'Any particular reason(s)?' )
 		);
 
-		appendRadioOption(
-			'anotherReasonTwo',
-			translate( 'Another reason…' ),
-			translate( 'How can we improve?' )
-		);
+		appendRadioOption( 'anotherReasonTwo', translate( 'Another reason…' ), ' ' );
 
 		return (
 			<div>
