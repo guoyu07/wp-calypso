@@ -26,6 +26,8 @@ import HappychatButton from 'components/happychat/button';
 import * as steps from './steps';
 import BusinessATStep from './stepComponents/business-at-step';
 import UpgradeATStep from './stepComponents/upgrade-at-step';
+import { getName } from 'lib/purchases';
+import { isJetpackPlan } from 'lib/products-values';
 
 const radioOption = (
 	key,
@@ -64,14 +66,13 @@ const radioOption = (
 
 class CancelPurchaseForm extends React.Component {
 	static propTypes = {
-		productName: PropTypes.string.isRequired,
-		translate: PropTypes.func,
-		surveyStep: PropTypes.string.isRequired,
-		showSurvey: PropTypes.bool.isRequired,
+		chatInitiated: PropTypes.func.isRequired,
 		defaultContent: PropTypes.node.isRequired,
 		onInputChange: PropTypes.func.isRequired,
-		isJetpack: PropTypes.bool.isRequired,
-		chatInitiated: PropTypes.func.isRequired,
+		purchase: PropTypes.object.isRequired,
+		showSurvey: PropTypes.bool.isRequired,
+		surveyStep: PropTypes.string.isRequired,
+		translate: PropTypes.func,
 	};
 
 	constructor( props ) {
@@ -92,7 +93,7 @@ class CancelPurchaseForm extends React.Component {
 		] );
 
 		// set different reason groupings for Jetpack subscribers
-		if ( props.isJetpack ) {
+		if ( isJetpackPlan( props.purchase ) ) {
 			questionOneOrder = shuffle( [ 'couldNotActivate', 'didNotInclude', 'onlyNeedFree' ] );
 
 			questionTwoOrder = shuffle( [ 'stayingHere', 'otherPlugin', 'leavingWP', 'noNeed' ] );
@@ -323,7 +324,8 @@ class CancelPurchaseForm extends React.Component {
 	};
 
 	renderLiveChat = () => {
-		const { chatInitiated, productName, translate } = this.props;
+		const { chatInitiated, purchase, translate } = this.props;
+		const productName = getName( purchase );
 		return (
 			<FormFieldset>
 				<p>
