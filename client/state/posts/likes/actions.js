@@ -11,6 +11,7 @@ import {
 	POST_LIKES_REQUEST_SUCCESS,
 	POST_LIKES_REQUEST_FAILURE,
 	POST_LIKE,
+	POST_LIKE_UPDATE_COUNT,
 	POST_UNLIKE,
 } from 'state/action-types';
 
@@ -85,4 +86,20 @@ export const unlike = ( siteId, postId ) => ( {
 	type: POST_UNLIKE,
 	siteId,
 	postId,
+} );
+
+export const receiveLikes = ( siteId, postId, { likes, iLike, found } ) => ( {
+	type: POST_LIKES_RECEIVE,
+	siteId,
+	postId,
+	likes,
+	iLike,
+	found,
+} );
+
+export const updateLikeCount = ( siteId, postId, likeCount ) => ( {
+	type: POST_LIKE_UPDATE_COUNT,
+	siteId,
+	postId,
+	likeCount,
 } );
