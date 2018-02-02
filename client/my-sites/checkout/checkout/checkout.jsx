@@ -269,14 +269,14 @@ const Checkout = createReactClass( {
 		return flatten( Object.values( purchases ) );
 	},
 
-	cartHasEligibleDomain() {
+	getEligibleDomainFromCart() {
 		const domainRegistrations = cartItems.getDomainRegistrations( this.props.cart );
-		const domainsInSignupContext = filter( domainRegistrations, { context: 'signup' } );
+		const domainsInSignupContext = filter( domainRegistrations, { extra: { context: 'signup' } } );
 		const domainsForGSuite = filter( domainsInSignupContext, ( { meta } ) =>
 			canAddGoogleApps( meta )
 		);
 
-		return !! domainsForGSuite.length;
+		return domainsForGSuite;
 	},
 
 	getCheckoutCompleteRedirectPath() {
@@ -319,12 +319,15 @@ const Checkout = createReactClass( {
 			this.props.isNewlyCreatedSite &&
 			! cartItems.hasGoogleApps( cart ) &&
 			cartItems.hasDomainRegistration( cart ) &&
-			isEmpty( receipt.failed_purchases ) &&
-			this.cartHasEligibleDomain()
+			isEmpty( receipt.failed_purchases )
 		) {
-			return `/checkout/${ selectedSiteSlug }/with-gsuite/${
-				domainsForGsuite[ 0 ].meta
-			}/${ receiptId }`;
+			const domainsForGSuite = this.getEligibleDomainFromCart();
+
+			if ( domainsForGSuite.length ) {
+				return `/checkout/${ selectedSiteSlug }/with-gsuite/${
+					domainsForGSuite[ 0 ].meta
+				}/${ receiptId }`;
+			}
 		}
 
 		if (
