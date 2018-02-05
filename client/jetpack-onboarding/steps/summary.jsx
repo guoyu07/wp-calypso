@@ -17,6 +17,7 @@ import Button from 'components/button';
 import DocumentHead from 'components/data/document-head';
 import FormattedHeader from 'components/formatted-header';
 import PageViewTracker from 'lib/analytics/page-view-tracker';
+import QuerySites from 'components/data/query-sites';
 import Spinner from 'components/spinner';
 import {
 	getJetpackOnboardingPendingSteps,
@@ -101,7 +102,7 @@ class JetpackOnboardingSummaryStep extends React.PureComponent {
 	};
 
 	render() {
-		const { siteUrl, translate } = this.props;
+		const { siteId, siteUrl, translate } = this.props;
 
 		const headerText = translate( 'Congratulations! Your site is on its way.' );
 		const subHeaderText = translate(
@@ -116,6 +117,7 @@ class JetpackOnboardingSummaryStep extends React.PureComponent {
 					title="Summary ‹ Jetpack Onboarding"
 				/>
 				<FormattedHeader headerText={ headerText } subHeaderText={ subHeaderText } />
+				<QuerySites siteId={ siteId } />
 
 				<div className="steps__summary-columns">
 					<div className="steps__summary-column">
